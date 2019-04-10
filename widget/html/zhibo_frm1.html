@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>nice</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/auislide.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0; }
+        .aui-row img {
+		border-radius: 0.5rem;
+		width: 5rem;
+		height: 5rem;
+		margin: 0 auto;
+		box-shadow: 0.01rem 0.1rem 0.2rem rgba(99, 99, 99, 0.29);
+		}
+    </style>
+</head>
+<body>
+  <!--<div id="aui-slide">
+    <div id="slidebox" class="aui-slide-wrap">
+
+
+    </div>
+    <div class="aui-slide-page-wrap"> </div>
+  </div>
+  <div class="br"></div>-->
+  <div class="list-title" style="margin-bottom: 10px;">
+    <div class="list-title-l">
+      <span style="color:#7741fb;font-size: 0.7rem"><i class="iconfont icon-zuirehotchunse" style="color:#7741fb;font-size: 0.8rem"></i>热门平台</span>
+      <span id="lengthspan" style="color:#CCCCCC;font-size: 0.6rem">共0个</span>
+    </div>
+    <div class="list-title-r">
+      <div class="aui-label aui-label-primary" style="font-size: 0.5rem">持续增加</div>
+    </div>
+  </div>
+  <section class="aui-grid aui-margin-b-15">
+      <div class="aui-row" id="div_list2">
+
+      </div>
+      <div class="aui-row" id="div_list">
+		
+		
+      </div>
+  </section>
+
+</body>
+<script type="text/x-dot-template" id="template">
+{{~ it.list : value : index }}
+    <div class="aui-col-xs-4 pt-list" tapmode onclick="openLive('{{= it. key }}','{{= value. id }}','{{= value. name }}','{{= value. count }}')">
+      <i class="aui-iconfont"><img src="http://live.mengwawa.vip/imge/{{= value. name }}.png" data-src="http://live.mengwawa.vip/imge/{{= value. name }}.png"/></i>
+      <div class="aui-grid-label">{{= value. name }}</div>
+      <div class="aui-label-list aui-label aui-label-danger">
+        <i class="iconfont icon-live" style="font-size:0.5rem;line-height:0;"></i>
+        {{= value. count }}
+      </div>
+    </div>
+{{~}}
+</script>
+<!--<script type="text/x-dot-template" id="bannertpl">
+  {{~ it.msg : value : index }}
+    <div class="aui-slide-node bg-dark" tapmode onclick="toBanner('{{= value. linkurl }}')">
+        <img src="http://live.mengwawa.vip{{= value. picurl }}" />
+    </div>
+  {{~}}
+</script>-->
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.js"></script>
+<script type="text/javascript" src="../script/auipullrefresh.js"></script>
+<script type="text/javascript" src="../script/auislide.js"></script>
+<script type="text/javascript" src="../script/auilazyload.js" ></script>
+<script type="text/javascript">
+
+  var api_url = localStorage.getItem('api_url');
+  apiready = function(){
+    api.parseTapmode();
+    newData();
+    var user_id = localStorage.getItem('user_id');
+    /*if (user_id>1) {
+      api.ajax({
+          url: api_url+'/login/login/imei.html',
+          method: 'get',
+          data: {
+              values: {
+                  uid: user_id
+              }
+          }
+      },function(ret, err){
+          if (ret) {
+              if (ret.msg.phone!=api.deviceId) {
+                localStorage.setItem('user_id','');
+                localStorage.setItem('user_name','');
+                localStorage.setItem('user_time','');
+                api.sendEvent({
+                  name: 'newLoingdata',
+                  extra: {
+                  }
+                });
+
+                api.alert({
+                    title: '登陆信息已过期',
+                    msg: '请重新登陆',
+                });
+
+              }
+          } else {
+
+          }
+      });
+    }*/
+    api.setRefreshHeaderInfo({
+        visible: true,
+        loadingImg: 'widget://image/refresh.png',
+        bgColor: '#fff',
+        textColor: '#333',
+        textDown: '下拉刷新...',
+        textUp: '松开刷新...',
+        showTime: true
+    }, function(ret, err){
+      if (err) {
+        api.toast({
+            msg: '加载数据失败',
+            duration: 2000,
+            location: 'middle'
+        });
+        api.refreshHeaderLoadDone();
+      }else {
+        api.showProgress({
+            title: '努力加载中...',
+            text: '福利正在赶路...',
+            modal: false
+        });
+        newData();
+      }
+    });
+  }
+
+
+  //访问轮播地址
+  function toBanner(url){
+
+    if (url == '') {
+
+    }else {
+      api.openWin({
+          name: 'h5',
+          url: './h5.html',
+          pageParam: {
+              url: url
+          }
+      });
+    }
+  }
+
+
+  //获取数据
+  function newData(){
+    var div_list = $api.byId('div_list');
+    var template = $api.byId('template');
+
+    api.ajax({
+        url:'http://live.mengwawa.vip/login/login/ping.html',
+        method: 'get',
+    },function(ret, err){
+        if (ret) {
+          if (ret.code == 0) {
+            api.toast({
+                msg: '已加载完成',
+                duration: 1000,
+                location: 'middle'
+            });
+          }else {
+            //渲染模板
+            var pagefn = doT.template(template.text);
+            div_list.innerHTML = pagefn(ret);
+            var length = ret.list.length;
+            var lengthget = $api.byId('lengthspan');
+            lengthget.innerHTML = '共'+length+'个';
+            api.hideProgress();
+            api.refreshHeaderLoadDone();
+          }
+
+        } else {
+          api.toast({
+              msg: '网络错误',
+              duration: 1000,
+              location: 'middle'
+          });
+          api.hideProgress();
+          api.refreshHeaderLoadDone();
+        }
+    });
+  }
+
+  //轮播图获取
+  function getBanner(){
+    var bannerid = $api.byId('slidebox');
+    var bannertpl = $api.byId('bannertpl');
+
+    api.ajax({
+        url: api_url+'/login/login/banner.html',
+        method: 'get',
+    },function(ret, err){
+        if (ret) {
+          //渲染模板
+          var pagefn = doT.template(bannertpl.text);
+          bannerid.innerHTML = pagefn(ret);
+          banNer();
+
+        } else {
+            alert( '网络错误' );
+            api.hideProgress();
+        }
+    });
+  }
+
+
+
+  //页面传参
+  function openLive(key,id,name,count){
+    if (localStorage.getItem('user_id')<1) {
+      api.openWin({
+          name: 'from',
+          url: './from.html',
+      });
+      return;
+    }else {
+      var delay = 0;
+      if(api.systemType != 'ios'){
+          delay = 300;
+      }
+      api.openWin({
+          name: 'live_list_win',
+          url: './live_list_win.html',
+          bounces:false,
+          delay: delay,
+          slidBackEnabled:true,
+          vScrollBarEnabled:false,
+          pageParam:{key:key,id:id,name:name,count:count},
+      });
+    }
+
+  }
+
+  function openWin(name){
+      var delay = 0;
+      if(api.systemType != 'ios'){
+          delay = 300;
+      }
+      api.openWin({
+          name: ''+name+'',
+          url: ''+name+'.html',
+          bounces:false,
+          delay: delay,
+          slidBackEnabled:true,
+          vScrollBarEnabled:false
+      });
+  }
+
+  //幻灯轮播图
+  function banNer(){
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"),
+        // "width":300,
+        "height":150,
+        "speed":300,
+        "pageShow":true,
+        "autoPlay": 5000,
+        "pageStyle":'dot',
+        "loop":true,
+        'dotPosition':'center',
+    });
+  }
+
+  new auiLazyload({
+      errorImage:'../image/nv.png'
+  });
+
+
+</script>
+</html>

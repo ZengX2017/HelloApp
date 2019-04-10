@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+</head>
+<body>
+  <section class="myui-bg-live">
+    <div class="live-top">
+      <div class="live-top-l">
+        <img id="picname" src="">
+      </div>
+      <div class="live-top-r">
+        <div class="live-top-r-t">
+          <span id="name" class="live-ptname">直播</span>
+          <span class="live-pt">直播平台</span>
+          <div id="shu" class="aui-label-list aui-label aui-label-danger">
+            <i class="iconfont icon-live" style="font-size:0.5rem;line-height:0;"></i>
+          </div>
+        </div>
+        <div class="live-top-r-b">
+          该平台所有直播及图片内容全部来源第三方平台与APP无关，如有违规请及时举报！
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="br"></div>
+  <section class="aui-margin-b-15">
+      <div id="div_list" class="aui-row">
+
+      </div>
+  </section>
+
+</body>
+<script type="text/x-dot-template" id="template">
+
+    {{~ it.list : value : index }}
+    <div class="aui-col-xs-6" onclick="openLive('{{= value. rtmp }}','{{= value. img }}','{{= value. name }}')">
+        <div class="aui-badge">直播中</div>
+        <img class="zb-box-t" src="../image/error-img.jpg" data-src="{{= value. img }}">
+        <div class="zb-box-b">
+          <div class="zb-box-b-l">{{= value. name }}</div>
+          <div class="zb-box-b-r"><i class="aui-iconfont aui-icon-my" style="font-size: 0.5rem;"></i>{{= RndNum(4) }}</div>
+        </div>
+    </div>
+    {{~}}
+</script>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/doT.js" ></script>
+<script type="text/javascript" src="../script/auilazyload.js" ></script>
+<script type="text/javascript">
+  var api_url = 'http://live.mengwawa.vip';
+  new auiLazyload({
+      errorImage:'../image/nv.jpg'
+  });
+  apiready = function(){
+    var data = api.pageParam;
+    var name = $api.byId('name');
+    var picname = $api.byId('picname');
+    var shu = $api.byId('shu');
+    shu.innerHTML = '<i class="iconfont icon-zhibo" style="font-size:0.5rem;line-height:0;"></i>'+data.count;
+    picname.src = api_url+'/imge/'+data.name+'.png';
+    name.innerHTML = data.name;
+    newData();
+    api.showProgress({
+        title: '努力加载中...',
+        text: '福利正在赶路...',
+        modal: false
+    });
+    api.setRefreshHeaderInfo({
+        visible: true,
+        loadingImg: 'widget://image/refresh.png',
+        bgColor: '#fff',
+        textColor: '#333',
+        textDown: '下拉刷新...',
+        textUp: '松开刷新...',
+        showTime: true
+    }, function(ret, err){
+      if (err) {
+        api.toast({
+            msg: '加载数据失败',
+            duration: 2000,
+            location: 'middle'
+        });
+        api.refreshHeaderLoadDone();
+      }else {
+        newData();
+        api.toast({
+            msg: '刷新成功',
+            duration: 1000,
+            location: 'middle'
+        });
+        api.refreshHeaderLoadDone();
+
+      }
+
+    });
+
+  }
+
+
+  function RndNum(n){
+    var rnd="";
+    for(var i=0;i<n;i++)
+        rnd+=Math.floor(Math.random()*10);
+    return rnd;
+  }
+
+  //获取数据
+  function newData(){
+    var div_list = $api.byId('div_list');
+    var template = $api.byId('template');
+    var data = api.pageParam;
+    api.ajax({
+        url: api_url+'/login/login/web.html',
+        method: 'get',
+        data:{
+          values: {
+            key:data.key,
+            world:data.id,
+            run:''
+          }
+        }
+    },function(ret, err){
+        if (ret) {
+            //渲染模板
+            if (ret.code == 0) {
+              alert( '暂无主播在线' );
+              api.hideProgress();
+              api.closeWin();
+              return;
+            }else {
+              var pagefn = doT.template(template.text);
+              div_list.innerHTML = pagefn(ret);
+              //alert(pagefn(json));
+              api.hideProgress();
+            }
+
+
+        } else {
+            alert( '网络错误' );
+            api.hideProgress();
+            api.closeWin();
+            return;
+        }
+    });
+  }
+
+  //打开播放页
+  function openLive(url,pic,name){
+    var time = localStorage.getItem('user_time');
+    var user_id = localStorage.getItem('user_id');
+    var username = localStorage.getItem('user_name');
+    var timestamp = Date.parse(new Date())/1000;
+
+    if (time>timestamp) {
+      var delay = 0;
+      if(api.systemType != 'ios'){
+          delay = 300;
+      }
+      api.openWin({
+          name: 'live_win',
+          url: './live_win.html',
+          delay: 300,
+          pageParam:{url:url,pic:pic,name:name},
+          bgColor: 'rgba(0,0,0,0)'
+      });
+
+    }else if (time == -1) {
+      var delay = 0;
+      if(api.systemType != 'ios'){
+          delay = 300;
+      }
+      api.openWin({
+          name: 'live_win',
+          url: './live_win.html',
+          delay: 300,
+          pageParam:{url:url,pic:pic,name:name},
+          bgColor: '#000000'
+      });
+
+    }else if (time<timestamp){
+      alert('会员已到期！请续费');
+      api.openWin({
+          name: 'open_vip_win',
+          url: './open_vip_win.html',
+      });
+
+    }
+
+  }
+
+  function openWin(name){
+        var delay = 0;
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+        api.openWin({
+            name: ''+name+'',
+            url: ''+name+'.html',
+            bounces:false,
+            delay: delay,
+            slidBackEnabled:true,
+            vScrollBarEnabled:false
+        });
+    }
+</script>
+</html>

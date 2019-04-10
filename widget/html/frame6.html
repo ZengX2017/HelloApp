@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>吾爱演示</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/auislide.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style>
+			.empty {
+				text-align: center;
+				padding: 120px 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="aui-slide">
+			<div id="slidebox" class="aui-slide-wrap">
+
+			</div>
+			<div class="aui-slide-page-wrap"></div>
+		</div>
+		<section class="aui-grid aui-margin-b-15">
+			<!--<div class="aui-row">
+
+				<div class="aui-col-xs-3 pt-list" tapmode onclick="vList()">
+					<i class="aui-iconfont"><img class="zhiboImg" src="../image/zhibo/video.png"></i>
+					<div class="aui-grid-label">最新电影</div>
+				</div>
+				<div class="aui-col-xs-3 pt-list" tapmode onclick="tvList()">
+					<i class="aui-iconfont"><img class="zhiboImg" src="../image/zhibo/tv.png"></i>
+					<div class="aui-grid-label">电视直播</div>
+				</div>
+				<div class="aui-col-xs-3 pt-list" tapmode onclick="gameList()">
+					<i class="aui-iconfont"><img class="zhiboImg" src="../image/zhibo/game.png"></i>
+					<div class="aui-grid-label">游戏直播</div>
+				</div>
+				<div class="aui-col-xs-3 pt-list" tapmode onclick="mnList()">
+					<i class="aui-iconfont"><img class="zhiboImg" src="../image/zhibo/mnvideo.png"></i>
+					<div class="aui-grid-label">美女视频</div>
+				</div>
+
+			</div>-->
+			<div class="aui-row" id="fl_list">
+
+			</div>
+
+		</section>
+
+		<div class="fx-box" id="guanggao">
+
+		</div>
+		<div class="">
+
+		</div>
+	</body>
+	<script type="text/x-dot-template" id="bannertpl">
+		{{~ it.data : value : index }}
+		<div class="aui-slide-node bg-dark" tapmode onclick="toBanner('{{= value. linkurl }}')">
+			<img src="https://test.msapp.co/{{= value. picurl }}" />
+		</div>
+		{{~}}
+	</script>
+	<script type="text/x-dot-template" id="flicotpl">
+		{{~ it.data : value : index }}
+		<div class="aui-col-xs-3 pt-list" tapmode onclick="openWin('{{= value. linkurl }}')">
+			<i class="aui-iconfont"><img src="https://test.msapp.co/{{= value. picurl }}"/></i>
+			<div class="aui-grid-label">{{= value. name }}</div>
+		</div>
+
+		{{~}}
+	</script>
+	<script type="text/x-dot-template" id="guanggaotpl">
+		{{~ it.data : value : index }}
+		<div class="fx-box-t">
+			<img src="https://test.msapp.co/{{= value. picurl }}" style="border-radius:0.5rem;box-shadow:0.2rem 0.2rem 0.4rem rgba(99, 99, 99, 0.61);" tapmode onclick="toBanner('{{= value. linkurl }}')">
+		</div>
+		<div class="br"></div>
+		{{~}}
+	</script>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/doT.js"></script>
+	<script type="text/javascript" src="../script/auipullrefresh.js"></script>
+	<script type="text/javascript" src="../script/auislide.js"></script>
+	<script type="text/javascript" src="../script/auilazyload.js"></script>
+	<script type="text/javascript">
+		//alert(localStorage.getItem('fxpic1'));
+		var slide = new auiSlide({
+			container: document.getElementById("aui-slide"),
+			// "width":300,
+			"height": 120,
+			"speed": 300,
+			"pageShow": true,
+			"autoPlay": 5000,
+			"pageStyle": 'dot',
+			"loop": true,
+			'dotPosition': 'center',
+		});
+		new auiLazyload({
+			errorImage: '../image/error-img.jpg'
+		});
+		var api_url = localStorage.getItem('api_url');
+		apiready = function() {
+			api.parseTapmode();
+
+			getNav();
+		}
+
+		function imgUrl(img) {
+			if(img == 'img1') {
+				api.openWin({
+					name: 'h5',
+					url: './h5.html',
+					pageParam: {
+						url: localStorage.getItem('fxurl1')
+					}
+				});
+			} else {
+				api.openWin({
+					name: 'h5',
+					url: './h5.html',
+					pageParam: {
+						url: img
+					}
+				});
+			}
+
+		}
+
+		//访问轮播地址
+		function toBanner(url) {
+
+			if(url == '') {
+
+			} else {
+				api.openWin({
+					name: 'h5',
+					url: './h5.html',
+					pageParam: {
+						url: url
+					}
+				});
+			}
+		}
+
+		function openWin(name) {
+			var time = localStorage.getItem('user_time');
+			var user_id = localStorage.getItem('user_id');
+			var username = localStorage.getItem('user_name');
+			var timestamp = Date.parse(new Date()) / 1000;
+			if(user_id == 0) {
+				api.alert({
+					title: '温馨提示',
+					msg: '请先登陆后使用',
+				});
+				api.openWin({
+					name: 'login',
+					url: './login.html',
+					delay: 300
+				});
+				return;
+
+			}
+
+			if(time > timestamp) {
+				api.openWin({
+					name: '' + name + '',
+					url:  name,
+					bounces: false,
+					delay: 300
+				});
+			} else if(time == -1) {
+				api.openWin({
+					name: '' + name + '',
+					url:  name ,
+					bounces: false,
+					delay: 300
+				});
+			} else if(time < timestamp) {
+				alert('到期啦~官人先开个VIP哟');
+				api.openWin({
+					name: 'open_vip_win',
+					url: './open_vip_win.html',
+				});
+			}
+
+		}
+
+		//幻灯轮播图
+		function banNer() {
+			var slide = new auiSlide({
+				container: document.getElementById("aui-slide"),
+				// "width":300,
+				"height": 150,
+				"speed": 300,
+				"pageShow": true,
+				"autoPlay": 5000,
+				"pageStyle": 'dot',
+				"loop": true,
+				'dotPosition': 'center',
+			});
+		}
+		//图标获取
+		function getNav() {
+			var flid = $api.byId('fl_list');
+			var fltpl = $api.byId('flicotpl');
+			var bannerid = $api.byId('slidebox');
+			var bannertpl = $api.byId('bannertpl');
+
+			var guanggaoid = $api.byId('guanggao');
+			var guanggaotpl = $api.byId('guanggaotpl');
+			api.ajax({
+				url: api_url + '/app/nav/fl',
+				method: 'get',
+			}, function(ret, err) {
+				if(ret) {
+					//渲染模板
+					var pagefn = doT.template(fltpl.text);
+					flid.innerHTML = pagefn(ret.tu);
+					var pagefn = doT.template(bannertpl.text);
+					bannerid.innerHTML = pagefn(ret.banner);
+					var pagefn = doT.template(guanggaotpl.text);
+					guanggaoid.innerHTML = pagefn(ret.guanggao);
+					banNer();
+					//        alert( JSON.stringify( ret.banner ) );
+
+				} else {
+					alert('网络错误');
+					api.hideProgress();
+				}
+			});
+		}
+
+		function vList() {
+			var time = localStorage.getItem('user_time');
+			var user_id = localStorage.getItem('user_id');
+			var username = localStorage.getItem('user_name');
+			var timestamp = Date.parse(new Date()) / 1000;
+			if(user_id == 0) {
+				api.alert({
+					title: '温馨提示',
+					msg: '请先登陆后使用',
+				});
+				api.openWin({
+					name: 'login',
+					url: './login.html',
+					delay: 300
+				});
+				return;
+
+			}
+
+			if(time > timestamp) {
+
+			} else if(time == -1) {
+
+			} else if(time < timestamp) {
+				alert('到期啦~官人先开个VIP哟');
+				api.openWin({
+					name: 'open_vip_win',
+					url: './open_vip_win.html',
+				});
+				return;
+			}
+			var delay = 0;
+			if(api.systemType != 'ios') {
+				delay = 300;
+			}
+			api.openWin({
+				name: 'v_list_win',
+				url: 'v_list_win.html',
+				bounces: false,
+				delay: delay,
+				slidBackEnabled: true,
+				vScrollBarEnabled: false,
+			});
+		}
+
+		function tvList() {
+			var time = localStorage.getItem('user_time');
+			var user_id = localStorage.getItem('user_id');
+			var username = localStorage.getItem('user_name');
+			var timestamp = Date.parse(new Date()) / 1000;
+			if(user_id == 0) {
+				api.alert({
+					title: '温馨提示',
+					msg: '请先登陆后使用',
+				});
+				api.openWin({
+					name: 'login',
+					url: './login.html',
+					delay: 300
+				});
+				return;
+
+			}
+
+			if(time > timestamp) {
+
+			} else if(time == -1) {
+
+			} else if(time < timestamp) {
+				alert('到期啦~官人先开个VIP哟');
+				api.openWin({
+					name: 'open_vip_win',
+					url: './open_vip_win.html',
+				});
+				return;
+			}
+			var delay = 0;
+			if(api.systemType != 'ios') {
+				delay = 300;
+			}
+			api.openWin({
+				name: 'tv_list_win',
+				url: 'tv_list_win.html',
+				bounces: false,
+				delay: delay,
+				slidBackEnabled: true,
+				vScrollBarEnabled: false,
+			});
+		}
+
+		function mnList() {
+			var time = localStorage.getItem('user_time');
+			var user_id = localStorage.getItem('user_id');
+			var username = localStorage.getItem('user_name');
+			var timestamp = Date.parse(new Date()) / 1000;
+			if(user_id == 0) {
+				api.alert({
+					title: '温馨提示',
+					msg: '请先登陆后使用',
+				});
+				api.openWin({
+					name: 'login',
+					url: './login.html',
+					delay: 300
+				});
+				return;
+
+			}
+
+			if(time > timestamp) {
+
+			} else if(time == -1) {
+
+			} else if(time < timestamp) {
+				alert('到期啦~官人先开个VIP哟');
+				api.openWin({
+					name: 'open_vip_win',
+					url: './open_vip_win.html',
+				});
+				return;
+			}
+			var delay = 0;
+			if(api.systemType != 'ios') {
+				delay = 300;
+			}
+			api.openWin({
+				name: 'v_mn_win',
+				url: 'v_mn_win.html',
+				bounces: false,
+				delay: delay,
+				slidBackEnabled: true,
+				vScrollBarEnabled: false,
+			});
+		}
+
+		function gameList() {
+			var time = localStorage.getItem('user_time');
+			var user_id = localStorage.getItem('user_id');
+			var username = localStorage.getItem('user_name');
+			var timestamp = Date.parse(new Date()) / 1000;
+			if(user_id == 0) {
+				api.alert({
+					title: '温馨提示',
+					msg: '请先登陆后使用',
+				});
+				api.openWin({
+					name: 'login',
+					url: './login.html',
+					delay: 300
+				});
+				return;
+
+			}
+
+			if(time > timestamp) {
+
+			} else if(time == -1) {
+
+			} else if(time < timestamp) {
+				alert('到期啦~官人先开个VIP哟');
+				api.openWin({
+					name: 'open_vip_win',
+					url: './open_vip_win.html',
+				});
+				return;
+			}
+			var delay = 0;
+			if(api.systemType != 'ios') {
+				delay = 300;
+			}
+			api.openWin({
+				name: 'game_list_win',
+				url: 'game_list_win.html',
+				bounces: false,
+				delay: delay,
+				slidBackEnabled: true,
+				vScrollBarEnabled: false,
+			});
+		}
+	</script>
+
+</html>
