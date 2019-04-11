@@ -264,7 +264,7 @@
 				tips: {
 					pull: '你…你想干什么！你不要过来！',
 					threshold: '讨厌 快放开我 非礼呀！',
-					load: '逆袭影院 享受生活'
+					load: 'VIP影院 享受生活'
 				}
 
 			}, function() {
@@ -378,32 +378,6 @@
 
 		/////////////联系管理 方法  kefu  E   ////////////
 
-		/*
-		    function openWin(name){
-		      if (localStorage.getItem('user_id')<1) {
-		        api.openWin({
-		            name: 'login',
-		            url: './login.html',
-		        });
-		        return;
-		      }else {
-		        var delay = 0;
-		        if(api.systemType != 'ios'){
-		            delay = 300;
-		        }
-
-		        api.openWin({
-		            name: ''+name+'',
-		            url: ''+name+'.html',
-		            bounces:false,
-		            delay: delay,
-		            slidBackEnabled:true,
-		            vScrollBarEnabled:false
-		        });
-		      }
-
-		    }
-		*/
 
 		/////////////获取会员数据 方法  getData  S   ////////////
 
@@ -440,7 +414,7 @@
 				time_ico.innerHTML = ' 管理员 ';
 				time.innerHTML = ' 欢迎回来！';
 
-				weichat.innerHTML = 'QQ：41886527';
+				weichat.innerHTML = '914823588';
 				islogin_vip.innerHTML = ' <img src="../image/app/vip_guanfang.png" alt="" style=" width: 45px; height: 15px; ">';
 
 				islogin.innerHTML = '' + user_name;
@@ -618,28 +592,6 @@
 		}
 		/////////////会员登录判断  方法  toLogin  E   ////////////
 
-		// 如果已经登录 就跳转到VIP升级
-		/*
-		    function toVip(){
-
-		        if (user_id>0 ) {
-		          api.openWin({
-		              name: 'open_vip_win',
-		              url: './open_vip_win.html',
-		              delay: 300,
-		          });
-		        }else {     //否则跳转到登录
-		          api.openWin({
-		              name: 'login',
-		              url: './login.html',
-		              delay: 300,
-		          });
-
-		        }
-
-		    }
-
-		*/
 
 		////////////退出登录 方法  exitLogin   s   ////////////
 		function exitLogin() {
@@ -1020,27 +972,6 @@
 								msg: '验证成功 正在登录',
 								duration: 5000
 							});
-
-							//alert( JSON.stringify( ret ) );
-							/*
-               api.sendEvent({
-                 name: 'newLoingdata',
-                 extra: {
-                 }
-               });
-
-
-
-               api.hideProgress();
-
-         api.closeWin({
-               });
-
-            api.openWin({
-                 name: 'h5',
-                 url: 'http://piyibo.cn/index/index/index',
-                });
-*/
 							api.openWin({
 								name: 'daili_guanli_win',
 								url: './daili_guanli_win.html',

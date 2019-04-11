@@ -62,10 +62,6 @@
         if (ret) {
             copy = ret.msg;
             shama = ret.share;
-             //var url = $api.byId('url');
-             //var share = $api.byId('share');
-             //url.innerHTML = '<img src="http://qr.liantu.com/api.php?text='+ret.msg+'"/>';
-             //share.innerHTML = ret.share;
             api.hideProgress();
 
         } else {
@@ -161,7 +157,7 @@ if (ret) {
 
   var clipBoard = api.require('clipBoard');
   clipBoard.set({
-      value: '【逆袭影院】全网VIP视频免费看，高清无广告，再也不用充值会员啦！APP下载地址：'+ret.url
+      value: '【VIP影院】全网VIP视频免费看，高清无广告，再也不用充值会员啦！APP下载地址：'+'http://downloadpkg.apicloud.com/app/download?path=http://A6091224309577.qiniucdn.apicloud-system.com/156577fde7219c5d9bbefeb3b892ed12_d'
   }, function(ret, err) {
       if (ret) {
         api.toast({
@@ -181,7 +177,7 @@ if (ret) {
 
   var clipBoard = api.require('clipBoard');
   clipBoard.set({
-      value: '【逆袭影院】全网VIP视频免费看，高清无广告，再也不用充值会员啦！APP下载地址：'+copy
+      value: '【VIP影院】全网VIP视频免费看，高清无广告，再也不用充值会员啦！APP下载地址：'+'http://downloadpkg.apicloud.com/app/download?path=http://A6091224309577.qiniucdn.apicloud-system.com/156577fde7219c5d9bbefeb3b892ed12_d'
   }, function(ret, err) {
       if (ret) {
         api.toast({

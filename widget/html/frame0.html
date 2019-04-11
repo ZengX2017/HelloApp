@@ -154,31 +154,7 @@
 		  <div class="aui-row">
 
 	<div class="aui-col-xs-3 pt-list" tapmode onClick="openVipurl('http://www.zhangyu.tv/')">
-          <i class="aui-iconfont"><img src="../image/zy.png"/></i>
-          <div class="aui-grid-label">体育直播</div>
-		  </div>
-
-		  <div class="aui-col-xs-3 pt-list" tapmode onClick="openVipurl('http://www.huya.com/')">
-          <i class="aui-iconfont"><img src="../image/huya.jpg"/></i>
-          <div class="aui-grid-label">虎牙直播</div>
-		  </div>
-
-		  <div class="aui-col-xs-3 pt-list" tapmode onClick="openVipurl('https://www.douyu.com/')">
-          <i class="aui-iconfont"><img src="../image/douyu.png"/></i>
-          <div class="aui-grid-label">斗鱼直播</div>
-		  </div>
-
-		  <div class="aui-col-xs-3 pt-list" tapmode onClick="openVipurl('https://www.panda.tv/')">
-          <i class="aui-iconfont"><img src="../image/xiongmao.jpg"/></i>
-          <div class="aui-grid-label">熊猫直播</div>
-		  </div>
-
-		  <div class="aui-col-xs-3 pt-list" tapmode onClick="openVipurl('http://www.kktv5.com/')">
-          <i class="aui-iconfont"><img src="../image/kk.jpg"/></i>
-          <div class="aui-grid-label">KK直播</div>
-		  </div>
-
-		  <div class="aui-col-xs-3 pt-list" tapmode onClick="openVipurl('https://m.23us.so/')">
+       	  <div class="aui-col-xs-3 pt-list" tapmode onClick="openVipurl('https://m.23us.so/')">
           <i class="aui-iconfont"><img src="../image/xiaoshuo.jpg"/></i>
           <div class="aui-grid-label">顶点小说</div>
 		  </div>
@@ -401,10 +377,6 @@
     api.hideProgress();
   }
   ///// *****某个请求提示框   具体用处不明   *******/////
-
-
-
-
 
 
   //////////////////////   打开APP时 获取Banner和图标  方法    DataLoading    定时     S //////////////////////
@@ -660,11 +632,7 @@ function banNer(){
 
 
           //网络连接判断S
-
-
-
-
-                              api.ajax({
+		  api.ajax({
                                   url: api_url+'/login/login/banben.html',
                                   method: 'get'
                               },function(ret, err){
@@ -709,10 +677,6 @@ function banNer(){
 
 
   }
-  ///////广告图片 和小图标广告  点击访问 方法    imgUrl   E   ///////
-
-
-
 
   ///// 轮播图片访问  方法  toBanner   S  ////
   function toBanner(url){
@@ -728,26 +692,13 @@ function banNer(){
 
 
       //网络连接判断S
-
-
                           api.ajax({
                               url: api_url+'/login/login/banben.html',
                               method: 'get'
                           },function(ret, err){
                               if (ret) {
 
-                                           //网络正常   跳转
-
-
-
-
-
-                                                 /*
-                                                 api.showProgress({
-                                                     title: 'VIP登录中',
-                                                     modal: false
-                                                 });
-                                           */
+                                        
                                            api.toast({
                                                msg: '加载中'
                                            });
@@ -795,13 +746,6 @@ function banNer(){
     var timestamp = Date.parse(new Date())/1000;
     if(user_id<1){
 
-  /*    api.alert({
-          title: '温馨提示',
-          msg: '请先登陆后使用',
-      });
-
-      原弹窗提示*/
-
       /*新提示*/
       api.toast({
           msg: '(ｷ｀ﾟДﾟ´)!!    你还没登陆！',
@@ -831,18 +775,7 @@ function banNer(){
                                                             },function(ret, err){
                                                                 if (ret) {
 
-                                                                             //网络正常   跳转
-
-
-
-
-
-                                                                                   /*
-                                                                                   api.showProgress({
-                                                                                       title: 'VIP登录中',
-                                                                                       modal: false
-                                                                                   });
-                                                                             */
+                                                                        
                                                                              api.toast({
                                                                                  msg: 'VIP登录'
                                                                              });
@@ -965,22 +898,6 @@ function banNer(){
       var user_id = localStorage.getItem('user_id');
       var username = localStorage.getItem('user_name');
       var timestamp = Date.parse(new Date())/1000;
-
-      /*
-      if(user_id!=0){
-        api.alert({
-            title: '温馨提示',
-            msg: '请先登陆后使用',
-        });
-        api.openWin({
-            name: 'login',
-            url: './login.html',
-            delay: 300
-        });
-        return;
-
-      }
-    */
 
       if (time>timestamp) {
 

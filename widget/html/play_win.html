@@ -15,18 +15,6 @@
 </head>
 
 <body>
-  <!--
-  <header class="aui-bar aui-bar-nav" id="header" style=" background: linear-gradient(#ff5e3e , #ff1679 );color:#fff;position: relative;padding-top:25px;">
-      <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
-          <span class="aui-iconfont aui-icon-left" style=color:#fff ></span>
-      </a>
-      <div id="title" class="aui-title" >正在播放视频....</div>
-      <a id="play" class="aui-btn aui-pull-right" style=color:#fff tapmode onclick="jieXi()">
-          更换线路
-      </a>
-  </header>
--->
-
 		<header class="aui-navBar aui-navBar-fixed" style="background: #000;position: relative;padding-top:25px;" id="header">
 
                     <a  tapmode onclick="closeWin()" class="aui-navBar-item"  tyle="color: #c4c4c4;"  >
@@ -119,7 +107,7 @@
 
     function jieXi(){
       api.actionSheet({
-          title: '逆袭影院VIP线路',
+          title: 'VIP影院线路',
           cancelTitle: '取消',
           buttons: ['VIP线路1', 'VIP线路2', 'VIP线路3', 'VIP线路4', 'VIP线路5', 'VIP线路6', 'VIP线路7', 'VIP线路8', 'VIP线路9']
       }, function(ret, err) {

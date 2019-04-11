@@ -518,29 +518,9 @@ a {
         <div class="aui-class-list-box" id="div_list">
 
 
-
-
-
-
             <!--加载提示-->
             <section class="m-noRecord"><div class="c-icon-noRecord"></div> <div class="c-info">奋力加载中...</div></section>
             <!--加载提示-->
-
-
-
-
-<!--
-                                        <a href="javascript:;" class="aui-class-list-item">
-                                              <div class="aui-cell-fl">
-                                                  <img src="images/icon-cell01.png" alt="">
-                                              </div>
-                                              <div class="aui-cell-fr">系统工具</div>
-                                              <div class="aui-cell-tr"></div>
-                                          </a>
-
-                        -->
-
-
                           </div>
 
   </ul>
@@ -557,16 +537,6 @@ a {
 
 <script type="text/x-dot-template" id="template">
 {{~ it.msg : value : index }}
-
-/*
-    <li onclick="openWin('{{= value. url }}')">
-      <div class="video-mask-box">
-        <img src="{{= value. img }}" alt="" class="game-pic">
-      </div>
-      <div class="til">{{= value. title }}</div>
-
-    </li>
-    */
 
     <a  onclick="openWin('{{= value. url }}')" class="aui-class-list-item">
                 <div class="aui-cell-fl">
@@ -723,21 +693,6 @@ clearInterval(GetTvlistTimer); // 获取成功 清除定时器
                                                                                 if (ret) {
 
                                                                                              //网络正常   跳转
-
-
-
-
-
-                                                                                                   /*
-                                                                                                   api.showProgress({
-                                                                                                       title: 'VIP登录中',
-                                                                                                       modal: false
-                                                                                                   });
-
-                                                                                             api.toast({
-                                                                                                 msg: '加载中'
-                                                                                             });
-                                                                                             */
 
                                                                                              var delay = 0;
                                                                                              if(api.systemType != 'ios'){
