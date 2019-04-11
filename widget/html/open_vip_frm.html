@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>title</title>
+    <title>VIP影视</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
@@ -213,7 +213,7 @@
   <!--    <div id="weichat" class="open-vip-b-kefu"></div>   -->
   </div>
 <br><br>
-    <p><div class="aui-btn-tuichu aui-btn-block"  id="weichat">专属客服微信：---</div></p>
+    <p><div class="aui-btn-tuichu aui-btn-block"  id="weichat">专属客服微信：z914823588forever</div></p>
 
     </div>
   </div>
@@ -289,7 +289,7 @@
                 localStorage.setItem('url5',ret.msg['url5']);
                 localStorage.setItem('url6',ret.msg['url6']);
                 var weichatdiv = $api.byId('weichat');
-                weichatdiv.innerHTML = '客服微信：'+localStorage.getItem('user_weichat');
+                //weichatdiv.innerHTML = '客服微信：'+localStorage.getItem('user_weichat');
                 api.sendEvent({
                   name: 'newLoingdata',
                   extra: {
@@ -435,7 +435,7 @@
       var dialogBox = api.require('dialogBox');
       dialogBox.alert({
           texts: {
-              content: '请联系客服微信：'+localStorage.getItem('user_weichat'),
+              content: '请联系客服微信：z914823588forever',
               leftBtnTitle: '知道了',
               rightBtnTitle: '联系客服'
           },
