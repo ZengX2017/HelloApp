@@ -52,7 +52,7 @@
     <ul>
       <li class="border-b active">      <a class="aui-navBar-item masked" id="tietle" style="
     color: #212121;
-">爱佳影视</a></li>
+">VIP影视</a></li>
       <li class="border-b">     <a class="aui-navBar-item">影视大厅</a> </li>
       <li class="border-b">     <a class="aui-navBar-item"></a> </li>
       <li class="border-b">     <a class="aui-navBar-item">福利中心</a> </li>
@@ -70,17 +70,6 @@
 
 
               </header>
-  <!--
-    <header>
-        <ul>
-          <li class="border-b active"  id="hbbox" style="color:#fff"></li>
-          <li class="border-b" style="color:#fff">大厅</li>
-          <li class="border-b" style="color:#fff">福利社</li>
-          <li class="border-b" style="color:#fff">会员中心</li>
-        </ul>
-    </header>
-  -->
-
 
     <div id="main" class="flex-con" >
 
@@ -182,13 +171,6 @@
 
 
                                              });
-
-
-
-
-
-
-
 
                                               $api.fixStatusBar( $api.dom('header') );
                                               api.setStatusBarStyle({
@@ -362,74 +344,11 @@
 
 
 
-/*
-////////           打开APP时进行网络环境判断   OpenAppNetworkMonitoring       S         //////////////////
-      function OpenAppNetworkMonitoring(){
-        api.ajax({
-            url: api_url+'/login/login/tongji.html',
-            method: 'get',
-            data: {
-                values: {
-                    os: api.systemType,
-                    imei: api.deviceId,
-                    uid:uid
-                }
-            }
-        },function(ret, err){
-            if (ret) {
-
-
-                //alert( JSON.stringify( ret ) );
-            }else {
-                //alert( JSON.stringify( err ) );
-
-
-                //打开APP时 网络连接失败 进行提示
-                ConnectionDetectionWithServer();
-
-            }
-
-
-        });
-
-  }
-////////           打开APP时进行网络环境判断     OpenAppNetworkMonitoring     E         //////////////////
-*/
-
-
-
 
 
 //////////////////////   顶部导航红包图片打开 方法    toBanner     S //////////////////////
   function toBanner(url){
 
-    /* 去掉VIP限制
-   var time = localStorage.getItem('user_time');
-    var user_id = localStorage.getItem('user_id');
-    var username = localStorage.getItem('user_name');
-    var timestamp = Date.parse(new Date())/1000;
-
-   if(user_id==0){
-      api.alert({
-          title: '温馨提示',
-          msg: '请先登陆后使用',
-      });
-      api.openWin({
-          name: 'login',
-          url: 'html/login.html',
-          delay: 300
-      });
-      return;
-
-    }
-
-    if (time>timestamp) {
-
-      setTimeout("playRadio();",1000);
-      var delay = 0;
-      if(api.systemType != 'ios'){
-          delay = 300;
-      } */
       api.openWin({
           name: 'haosheng_win',
           url: 'html/haosheng_win.html',

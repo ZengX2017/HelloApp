@@ -159,12 +159,6 @@
 			api.closeWin({});
 		}
 
-		// function toWin(name){
-		//   api.closeToWin({
-		//       name: name
-		//   });
-		// }
-
 		function openWin(name) {
 			var delay = 0;
 			if(api.systemType != 'ios') {
@@ -191,11 +185,6 @@
 			var password = $api.val($api.byId('password'));
 
 			if(username == '') {
-				/*    api.alert({
-				        title: '警告！',
-				        msg: '请输入登录账号',
-				    });
-				  原弹窗提示  */
 				api.toast({
 					msg: 'ε=(´ο｀*))) 调皮~   账号都没输入',
 					duration: 5000
@@ -203,23 +192,12 @@
 				return;
 			}
 			if(password == '') {
-				/*           api.alert({
-              title: '警告！',
-              msg: '请输入密码',
-          });
-  原弹窗提示  */
 				api.toast({
 					msg: 'ε=(´ο｀*))) 哎呀~   密码还没输入',
 					duration: 5000
 				});
 				return;
 			}
-			/*       api.showProgress({
-            title: '努力验证中',
-            text: '请骚等...',
-            modal: false
-        });
-原弹窗提示  */
 
 			api.toast({
 				msg: 'ヾ(◍°∇°◍)ﾉﾞ 努力验证中……',
@@ -244,9 +222,6 @@
 			}, function(ret, err) {
 				if(ret) {
 					if(ret.code == 0) {
-						/*    api.hideProgress();
-                alert('账号或密码不正确');
-  原弹窗提示  */
 						api.toast({
 							msg: '(ｷ｀ﾟДﾟ´)!! 账号或密码不正确',
 							duration: 5000
@@ -254,14 +229,10 @@
 
 						return;
 					} else if(ret.code == 1) {
-						/*       alert('登录成功');
-						      原弹窗提示  */
 						api.toast({
 							msg: '(#^.^#) 登陆成功！',
 							duration: 5000
 						});
-
-						//alert( JSON.stringify( ret ) );
 						
 						localStorage.setItem('accountLogin',0);
 						
@@ -287,11 +258,6 @@
 
 						api.closeWin({});
 
-						// api.openWin({
-						//     name: 'index',
-						//     url: '../index.html',
-						// });
-
 					}
 				} else {
 					api.hideProgress();
@@ -302,7 +268,6 @@
 						duration: 5000
 					});
 
-					//alert( JSON.stringify( err ) );
 					return;
 				}
 			});
@@ -315,7 +280,6 @@
 					Other_type = 'QQ';
 					QQ_getUserInfo(ret.openId);
 				} else {
-					//alert(JSON.stringify(err))
 					alert('QQ授权失败，请尝试重新登陆！')
 				}
 			});

@@ -201,28 +201,6 @@
       api.closeWin();
     });
 
-
-
-
-    /*  推荐影片
-    var div_list = $api.byId('div_list');
-    var template = $api.byId('template');
-    api.ajax({
-        url: 'http://app.ggavi.com/login/login/tjlist.html',
-        method: 'get'
-    },function(ret, err){
-        if (ret) {
-          //alert( JSON.stringify( ret ) );
-          var pagefn = doT.template(template.text);
-          div_list.innerHTML = pagefn(ret);
-          api.hideProgress();
-        } else {
-          api.hideProgress();
-            //alert( JSON.stringify( err ) );
-        }
-    });
-*/
-
     //获取信息
         api.parseTapmode();
 
@@ -356,32 +334,6 @@
 
     ///////访问轮播地址 方法    toBanner   E   ///////
 
-
-
-
-    ///////广告图片 和小图标广告 点击访问 方法    imgUrl   S   ///////
-    /*  function imgUrl(img){
-        if (img=='img1') {
-          api.openWin({
-              name: 'h5',
-              url: './h5.html',
-              pageParam: {
-                  url: localStorage.getItem('fxurl1')
-              }
-          });
-        }else {
-          api.openWin({
-              name: 'h5',
-              url: './h5.html',
-              pageParam: {
-                  url: img
-              }
-          });
-        }
-
-      }*/
-
-    //// ↑ ↑ ↑ ↑ ↑原方法  ↑ ↑ ↑ ↑ ↑////
     function imgUrl(url){
 
 
@@ -405,18 +357,7 @@
                                 },function(ret, err){
                                     if (ret) {
 
-                                                 //网络正常   跳转
-
-
-
-
-
-                                                       /*
-                                                       api.showProgress({
-                                                           title: 'VIP登录中',
-                                                           modal: false
-                                                       });
-                                                 */
+                                              
                                                  api.toast({
                                                      msg: '加载中'
                                                  });

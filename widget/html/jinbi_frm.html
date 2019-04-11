@@ -26,7 +26,7 @@
 			</form>
 
 			<div class="myui-jifen-1">
-				<h2 id="sign"></h2>当前吾爱金币
+				<h2 id="sign"></h2>当前金币
 			</div>
 			<div id="bili2" class="myui-jifen-2" style="padding-top:2rem;">
 
@@ -87,54 +87,6 @@
 				processData: false
 			});
 
-			/*
-			    for (var i = 0; i < e.target.files.length; i++) {
-			        var file = e.target.files.item(i);
-			        if (!(/^image\/.*$/i.test(file.type))) {
-			            continue; //不是图片 就跳出这一次循环
-			        }
-			        //实例化FileReader API
-			        var freader = new FileReader();
-			        freader.readAsDataURL(file);
-			        freader.onload = function(e) {
-			            //$("#"+imgid).attr("src",e.target.result);
-			            var Imgsrc=e.target.result;
-			            api.showProgress({
-			               title: '收款码上传中...',
-			               modal: false
-			           });
-
-			           /*
-			          var values= {
-			            uid: localStorage.getItem('user_id'),
-			            zfb: Imgsrc
-			          }
-			                     alert( JSON.stringify( values ) );
-			           api.ajax({
-			             url: 'https://test.msapp.co/login/login/zfbcz.html',
-			             method: 'post',
-			             data: {
-			               "values":values
-			             }
-			           }, function(ret, err) {
-			             if(ret) {
-			                			  alert( JSON.stringify( ret ) );
-			               if(ret.code == 1) {
-			                 api.hideProgress();
-			                 var img=$api.byId(imgid);
-			                 img.src=e.target.result;
-			                 alert('上传成功');
-			               } else if(ret.code == 0) {
-			                 api.hideProgress();
-			                 alert('修改失败');
-			               } else {
-			                 api.hideProgress();
-			                 alert('网络错误！11');
-			               }
-			             }
-			           });*
-			        }
-			    }*/
 		}
 		$(':button').click(function() {
 			var formData = new FormData($('form')[0]);
@@ -219,7 +171,7 @@
 					//var bili = $api.byId('bili');
 
 					//bili.innerHTML = '100吾爱金币可以兑换1天会员资格！';
-					bili2.innerHTML = '100吾爱金币可以兑换1元现金!';
+					bili2.innerHTML = '100金币可以兑换1天会员资格!';
 					api.hideProgress();
 				} else {
 					api.hideProgress();
@@ -236,10 +188,10 @@
 
 			var bianl1 = document.querySelector('#sign');
 			var bianl2 = document.querySelector('#count').value;
-			var bianl3 = Number(bianl1.innerText) - (Number(bianl2) * 100); //兑换吾爱金币/积分比率!!!!
+			var bianl3 = Number(bianl1.innerText) - (Number(bianl2) * 100); 
 			var bianyu = Number(bianl3);
 			if(bianyu <= 0) {
-				alert('吾爱金币不足，无法兑换')
+				alert('金币不足，无法兑换')
 				return;
 			}
 			var shuji = Number(bianl2);
@@ -269,13 +221,9 @@
 			var bianl3 = Number(bianl1.innerText) - (Number(bianl2) * 100); //兑换吾爱金币/积分比率!!!!
 			var bianyu = Number(bianl3);
 			if(bianyu <= 0) {
-				alert('吾爱金币不足，无法兑换')
+				alert('金币不足，无法兑换')
 				return;
 			}
-			/*if(bianl2 < 20) {
-				alert('金额满50元，方可提现，或者您可以用金币兑换您的吾爱演示VIP时长哦！继续努力邀请好友吧！')
-				return;
-			}*/
 			var shuji = Number(bianl2);
 			sign.innerHTML = bianyu;
 			localStorage.setItem('user_jinb', bianyu);
@@ -296,36 +244,7 @@
 				}
 			};
 		}
-		/*
-		  function exchange00(){
-		    var share = $api.val($api.byId('count'));
-
-		    api.ajax({
-		        url: api_url+'/login/login/exchange.html',
-		        method: 'get',
-		        data: {
-		            values: {
-		                uid: localStorage.getItem('user_id'),
-		                share:share*jifenbi
-		            }
-		        }
-		    },function(ret, err){
-		        if (ret) {
-		            if (ret.code == 0) {
-		              alert( ret.msg );
-		            }else {
-		              getTime();
-		              alert( '成功兑换'+share+'天会员' );
-		            }
-
-		        } else {
-		          api.hideProgress();
-		            alert( '网络错误22' );
-		        }
-		    });
-		  }
-		*/
-
+		
 		//重新获取到期时间
 		function getTime() {
 			api.ajax({
