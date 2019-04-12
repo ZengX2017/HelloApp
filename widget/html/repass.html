@@ -122,24 +122,13 @@
 	var param = {zone:'86', phoneNumber:username, code:yzcode};
 	moduleSMSSDK.commitCode(param, function(ret, err){
 	if (err !== null && err !== undefined && err !== '') {
-		api.alert({
-				title: '糟糕~',
-				msg: '短信验证码不正确',
-			});
-			return;
-	} else {
-	
-	}
-	});
-	  
-	  /*if (yzcode != code_data) {
-        api.alert({
-            title: '糟糕~',
-            msg: '短信验证码不正确',
-        });
-        return;
-
-      }*/
+     // 错误消息示例：{"msg":"Template not exist.","code":484}
+    alert("Error:\n" + JSON.stringify(err));
+	return;
+    } else {
+        // 正常消息示例：{"smart":false}
+       alert("Success:\n" + JSON.stringify(ret));
+    });
       api.ajax({
           url: api_url+'/login/login/repass.html',
           method: 'get',
