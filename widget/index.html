@@ -18,14 +18,14 @@
         #footer ul li.active{ color: #f52737; }
         #footer ul li:nth-child(1){ background-image: url(./image/shouye.png); }
         #footer ul li:nth-child(2){ background-image: url(./image/zhibo.png); }
-        #footer ul li:nth-child(3){ background-image: url(./image/meng.png); background-size: 2rem;}
-        #footer ul li:nth-child(4){ background-image: url(./image/faxian.png); }
-        #footer ul li:nth-child(5){ background-image: url(./image/wode.png); }
+   /*     #footer ul li:nth-child(3){ background-image: url(./image/meng.png); background-size: 2rem;}  */
+        #footer ul li:nth-child(3){ background-image: url(./image/faxian.png); }
+        #footer ul li:nth-child(4){ background-image: url(./image/wode.png); }
         #footer ul li:nth-child(1).active{ background-image: url(./image/shouye2.png); }
         #footer ul li:nth-child(2).active{ background-image: url(./image/zhibo2.png); }
-        #footer ul li:nth-child(3).active{ background-image: url(./image/meng.png);  background-size: 2rem;}
-        #footer ul li:nth-child(4).active{ background-image: url(./image/faxian2.png); }
-        #footer ul li:nth-child(5).active{ background-image: url(./image/wode2.png); }
+   /*     #footer ul li:nth-child(3).active{ background-image: url(./image/meng.png);  background-size: 2rem;} */
+        #footer ul li:nth-child(3).active{ background-image: url(./image/faxian2.png); }
+        #footer ul li:nth-child(4).active{ background-image: url(./image/wode2.png); }
         .flex-con{
           overflow: auto;
           background-color:#fff;
@@ -130,22 +130,15 @@
     /////  初始化执行   S /////
     /////  apiready  一打开就执行的 函数
     apiready = function () {
-
-
-
                                         //  检测网络是否正常 OK
                                         api.addEventListener({
                                               name: 'online'
                                           }, function(ret, err) {
-                                            //  connectionType = ret.connectionType;
-
-
                                                           //关闭无网络提示弹窗
                                                           var dialogBox = api.require('dialogBox');
                                                           dialogBox.close({
                                                               dialogName: 'alert'
                                                           });
-
 
                                                         //  GetTitleData();     ////获取标题和红包图标 ////
                                                           GetfunIniGroup();   ////执行页面获取 ////
@@ -154,10 +147,6 @@
                                                               msg: '网络已恢复',
                                                               duration: 5000
                                                           });
-
-
-
-
                                           });
 
 
@@ -183,9 +172,6 @@
                                                 uid = 0;
                                               }
 
-
-  //      OpenAppNetworkMonitoring();   ////执行网络检测 ////
-       // GetTitleData();   ////获取标题和红包图标 ////
         GetfunIniGroup();   ////执行页面获取 ////
 
 
@@ -272,77 +258,10 @@
 
 
 //////////////    单点登录检测方法     E       ///////////
-
-
-
-
-
-/*
-  //////////////////////   APP定时器  方法    AppTimer    定时     S //////////////////////
-
-  //定时执行数据加载
-  var timer = setInterval(function(){
-      AppTimer();
-  },1000)
-
-  //判断是否服务器通信成功
-  function AppTimer() {
-
-
-                        api.ajax({
-                            url: 'http://101.132.102.96/AppHello.html',
-                            method: 'get'
-                        },function(ret, err){
-                            if (ret) {
-
-                              msg = ret.alevel;
-                              GetTitleData();   //获取标题和红包图标
-
-
-                              api.toast({
-                                  msg: '数据已更新'+ret.msg,
-                                  duration: 1000
-                              });
-
-
-                    //  clearInterval(timer); // 获取成功 清除定时器
-                            } else {
-
-
-
-                              api.toast({
-                                  msg: '服务器链接失败',
-                                  duration: 5000
-                              });
-
-
-
-
-
-                            }
-
-                        });
-
-
-
-
-  }
-
-  //////////////////////   APP定时器  方法    AppTimer    定时     E //////////////////////
-
 */
 
     }
 /////  初始化执行   E /////
-
-
-////////           第一次进入app时的滑动欢迎页   fnShowWelcome       S         //////////////////
-
-
-////////           第一次进入app时的滑动欢迎页   fnShowWelcome       E         //////////////////
-
-
-
 
 
 
