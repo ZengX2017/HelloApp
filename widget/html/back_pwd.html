@@ -58,9 +58,7 @@
 <script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript">
     var api_url = localStorage.getItem('api_url');
-	sendsms = api.require('sendSms');
-    var param = { appkey: "2ad0ee5f881ae", appsecret: "3070d5b4270339f719e0352260726d10" };
-    sendsms.regSms(param);
+	var moduleSMSSDK = api.require('smssdk');
     var onoff = true;
     var code_data = '';
     apiready = function () {
@@ -121,19 +119,21 @@
         });
         return;
       }
-      //mycode表示收到的验证码
-	  var param = { code: yzcode };
-	  sendsms.enterCode(param, function(ret, err) {
-		if (ret.result == "ok") {
-			alert("验证成功");
-		} else {
-			api.alert({
+	  
+	  // param中的key命名不能改变
+	var param = {zone:'86', phoneNumber:username, code:yzcode};
+	moduleSMSSDK.commitCode(param, function(ret, err){
+	if (err !== null && err !== undefined && err !== '') {
+		api.alert({
 				title: '糟糕~',
 				msg: '短信验证码不正确',
 			});
 			return;
-		}
-      });
+	} else {
+	
+	}
+	});
+	  
 	  /*if (yzcode != code_data) {
         api.alert({
             title: '糟糕~',
@@ -250,6 +250,19 @@
     }
     //生成验证码
     function generateCode(username){
+		var param = {zone:'86', phoneNumber: username};
+		moduleSMSSDK.getTextCode(param, function(ret, err){
+			if (err !== null && err !== undefined && err !== '') {
+			// 错误消息示例：{"msg":"Template not exist.","code":484}
+			alert("Error:\n" + JSON.stringify(err));
+			} else {
+			// 正常消息示例：{"smart":false}
+			alert("Success:\n" + JSON.stringify(ret));
+			}
+		});
+	}
+	/*
+	
 		var param = { phone: username };
 		sendsms.sendMessage(param, function(ret, err) {
 		if (ret.result == "ok") {
@@ -260,8 +273,8 @@
 			alert(ret.result);
 		}
 		});
-	}
-	/*
+	
+	
 	function RndNum(n){
       var rnd="";
       for(var i=0;i<n;i++)

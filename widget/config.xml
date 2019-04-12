@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><widget id="A6091224309577" security="false" version="0.0.1">
-  <name>爱佳影视</name>
+  <name>VIP影视</name>
   <description>Example For APICloud.</description>
   <author email="developer@apicloud.com" href="http://www.apicloud.com">Developer</author>
   <content src="index.html"/>
+  <meta-data name="Mob-AppKey" value="2ad0ee5f881ae"/>
+  <meta-data name="Mob-AppSecret" value="3070d5b4270339f719e0352260726d10"/>
   <preference name="pageBounce" value="false"/>
   <preference name="appCertificateVerify" value="false"/>
   <preference name="appBackground" value="rgba(0,0,0,0.0)"/>
@@ -25,13 +27,5 @@
   <permission name="bootCompleted"/>
   <permission name="hardware"/> 
 	<preference name="forbiddenSchemes" value="alipay,alipays,tmall,taobao,itaobao,alipayshare,alipayqr,taobaohd,zhuzhancaipiao4ipad,laiwangc6e34c6bf,mdict,omnifocus,qqnew,qqnews,iqiyi,qiyi-iphone,ppstream,QIYIHD-iPad,sohu-SViPad,sohuvideohd,sohuvideo-iphone,sohuvideo,youku,LetviPhone,bilibili,tudou,pptv,imgotv,funshionmovieiphone,com.baofeng.play,baiduvideoiphone,bdviphapp,tenvideohd,tenvideo,tenvideo2,tenvideo3,alipay://,alipays://,alipayshare://,tmall://,taobao://,itaobao://,taobaohd://,zhuzhancaipiao4ipad://,laiwangc6e34c6bf://,qqnew://,qqnews://,iqiyi://,qiyi-iphone://,ppstream://,QIYIHD-iPad://,sohu-SViPad://,sohuvideohd://,sohuvideo-iphone://,sohuvideo://,youku://,LetviPhone://,bilibili://,tudou://,pptv://,imgotv://,funshionmovieiphone://,baiduvideoiphone://,bdviphapp://,tenvideohd://,tenvideo://,tenvideo2://,tenvideo3://,com.56Video://com.baofeng.play://" />
-  <feature name="QQPlus">
-    <param name="urlScheme" value="OP6cjKrpBgzk95RP"/>
-    <param name="apiKey" value="1107951637"/>
-  </feature>
-  <feature name="wx">
-   <param name="urlScheme" value="wxe4c1cb7db809423f"/>
-   <param name="apiKey" value="wxe4c1cb7db809423f"/>
-   <param name="apiSecret" value="777ef514b23bc07e2b96f120ec15aea7"/> 
- </feature>
+
 </widget>
