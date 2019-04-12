@@ -207,6 +207,34 @@
                  return;
                }
 
+
+/*               var dialogBox = api.require('dialogBox');
+                dialogBox.discount({
+                    rect: {
+                        w: api.winWidth,
+                        h: api.winHeight
+
+                    },
+                    styles: {
+                        bg: 'rgba(0,0,0,0.0)',
+                        image: {
+                            path: 'widget://image/tishi.png',
+                            marginB: 0
+                        }
+                    }
+                }, function(ret) {
+                    //alert(JSON.stringify(ret));
+                    if (ret.eventType == 'image') {
+                      onoff = false;
+                        dialogBox.close({
+                            dialogName: 'discount'
+                        });
+                        huanxian();
+                    }
+                });
+*/
+
+
              }else {
 
              }
@@ -231,7 +259,22 @@
 
       });
 
-      
+      // api.openFrame({
+      //     name: 'zhedang',
+      //     url: 'zhedang.html',
+      //     bounces: true,
+      //     rect: {
+      //         x: 0,
+      //         y: headerPos.h,
+      //         w: api.winWidth,
+      //         h: 290
+      //     },
+
+      //     pageParam:{id:api.pageParam.id}
+      // });
+
+
+
       var dialogBox = api.require('dialogBox');
       dialogBox.taskPlan({
           rect: {
@@ -400,7 +443,7 @@
 
     function jieXi(){
       api.actionSheet({
-          title: 'VIP影院线路',
+          title: '逆袭影院VIP线路',
           cancelTitle: '取消',
           buttons: ['VIP线路1', 'VIP线路2', 'VIP线路3', 'VIP线路4', 'VIP线路5']
       }, function(ret, err) {

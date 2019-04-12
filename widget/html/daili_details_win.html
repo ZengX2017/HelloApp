@@ -16,15 +16,15 @@
         </a>
         <div id="title" class="aui-title">邀请好友</div>
     </header> -->
-    <header class="aui-navBar aui-navBar-fixed" style="background: #fff8dc;" id="aui-header">
+    <header class="aui-navBar aui-navBar-fixed" style="background: #fff;" id="aui-header">
                     <a  onclick="closeWin()" class="aui-navBar-item"  >
                   <i class="icon icon-back"></i>
                     </a>
                     <div class="aui-center">
-                        <span class="aui-center-title"   id="title" style="background: linear-gradient(to right, red, blue); -webkit-background-clip: text; color: transparent;" >  邀请好友</span>
+                        <span class="aui-center-title"   id="title" style="background: linear-gradient(to right, red, blue); -webkit-background-clip: text; color: transparent;" >  代理介绍</span>
                     </div>
 
-                    <a   class="aui-navBar-item" style="color: #725f5f;"  >
+                    <a  onclick="clearR()" class="aui-navBar-item" style="color: #725f5f;"  >
                   <i class="icon"></i>
                     </a>
 
@@ -42,8 +42,8 @@
     var headerPos = $api.offset(header);
     var body_h = $api.offset($api.dom('body')).h;
     api.openFrame({
-        name: 'share_fm',
-        url: 'share_fm.html',
+        name: 'daili_details_fm',
+        url: 'daili_details_fm.html',
         bounces: true,
         bgColor: '#fffae4',
         rect: {

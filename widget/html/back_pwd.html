@@ -58,6 +58,9 @@
 <script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript">
     var api_url = localStorage.getItem('api_url');
+	sendsms = api.require('sendSms');
+    var param = { appkey: "2ad0ee5f881ae", appsecret: "3070d5b4270339f719e0352260726d10" };
+    sendsms.regSms(param);
     var onoff = true;
     var code_data = '';
     apiready = function () {
@@ -118,14 +121,26 @@
         });
         return;
       }
-      if (yzcode != code_data) {
+      //mycode表示收到的验证码
+	  var param = { code: yzcode };
+	  sendsms.enterCode(param, function(ret, err) {
+		if (ret.result == "ok") {
+			alert("验证成功");
+		} else {
+			api.alert({
+				title: '糟糕~',
+				msg: '短信验证码不正确',
+			});
+			return;
+		}
+      });
+	  /*if (yzcode != code_data) {
         api.alert({
             title: '糟糕~',
             msg: '短信验证码不正确',
         });
         return;
-
-      }
+      }*/
       api.ajax({
           url: api_url+'/login/login/repass.html',
           method: 'get',
@@ -205,9 +220,10 @@
         onoff = true;
         return;
       }
-      code_data = RndNum(6);
-      var content = escape('#code#='+code_data);
-      //alert(content);
+      generateCode(username);
+	  //code_data = RndNum(6);
+      //var content = escape('#code#='+code_data);
+	  /*
       api.ajax({
           url: 'http://101.132.102.96/login/login/yzcode.html',
           method: 'get',
@@ -230,16 +246,29 @@
           getApicode(username,content);
         }
       });
-
+		*/
     }
     //生成验证码
-    function RndNum(n){
+    function generateCode(username){
+		var param = { phone: username };
+		sendsms.sendMessage(param, function(ret, err) {
+		if (ret.result == "ok") {
+			maxtime = 90;
+			timer1 = setInterval("send_code_jishi();", 1000);
+			alert("短信发送成功");
+		} else {
+			alert(ret.result);
+		}
+		});
+	}
+	/*
+	function RndNum(n){
       var rnd="";
       for(var i=0;i<n;i++)
           rnd+=Math.floor(Math.random()*10);
       return rnd;
     }
-
+	
      function getApicode(username,content) {
           var btn1 = $api.byId('btn1');
           api.ajax({
@@ -267,7 +296,7 @@
                   },1000)
           });
         }
-
+*/
 
 
 

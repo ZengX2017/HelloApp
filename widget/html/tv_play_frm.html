@@ -107,8 +107,58 @@
 
 
 
+
+<!--
+
+<div class="aui-tab" style=" background: #fff; ">
+        <div class="tab-panel">
+            <div class="tab-panel-item tab-active">
+                <div class="tab-item">
+                    <a class="aui-flex b-line">
+
+                        <div class="aui-flex-box">
+                          <p>
+                              <em class="aui-group-three" style=" font-size: 12px; "> 最新热门电影推荐</em>
+                          </p>
+
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+-->
+
+
+    <!-- 视频列表 -->
+    <!--
+  <div class="v-list-wrap" id="liveList">
+    <ul class="clearfix" id="div_list">
+
+    </ul>
+  </div>
+-->
+  <!-- 视频列表 end-->
+
 </body>
 <!--  影片推荐-->
+<!--
+<script type="text/x-dot-template" id="template">
+{{~ it.msg : value : index }}
+    <li onclick="openWin('{{= value. url }}')">
+      <div class="video-mask-box">
+        <img src="{{= value. img }}" alt="" class="game-pic">
+      </div>
+      <div class="til">{{= value. title }}</div>
+
+    </li>
+{{~}}
+</script>
+-->
 
 <script type="text/x-dot-template" id="flicotpl">
   {{~ it.data : value : index }}
@@ -189,13 +239,66 @@
 /////// 播放器加载  E ////////
 
 
+//////////   获取 推荐影片数据  S  /////
+/*    api.showProgress({
+        title: '加载中...',
+        modal: false
+    });
+    var div_list = $api.byId('div_list');
+    var template = $api.byId('template');
+    api.ajax({
+        url: 'http://101.132.102.96/login/login/tjlist.html',
+        method: 'get'
+    },function(ret, err){
+        if (ret) {
+          //alert( JSON.stringify( ret ) );
+          var pagefn = doT.template(template.text);
+          div_list.innerHTML = pagefn(ret);
+          api.hideProgress();
+        } else {
+          api.hideProgress();
+            //alert( JSON.stringify( err ) );
+        }
+    });
+    */
+//////////   获取 推荐影片数据  E  /////
+
+
 
 //获取信息
     api.parseTapmode();
-		getNav();
+
+  getNav();
+
+
+
   }
 
 /////  初始化执行   E /////
+
+
+
+//////////////////////   播放器下方推荐影片打开  方法    openWin     S //////////////////////
+/*
+  function openWin(name){
+        var delay = 0;
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+        api.openWin({
+            name: 'vplay_win',
+            url: 'vplay_win.html',
+            bounces:false,
+            delay: delay,
+            slidBackEnabled:true,
+            vScrollBarEnabled:false,
+            pageParam:{video:name}
+        });
+    }
+    */
+//////////////////////   播放器下方推荐影片打开  方法    openWin     E //////////////////////
+
+
 
 
 
@@ -237,12 +340,34 @@
 
 
     ///////广告图片 和小图标广告 点击访问 方法    imgUrl   S   ///////
+    /*  function imgUrl(img){
+        if (img=='img1') {
+          api.openWin({
+              name: 'h5',
+              url: './h5.html',
+              pageParam: {
+                  url: localStorage.getItem('fxurl1')
+              }
+          });
+        }else {
+          api.openWin({
+              name: 'h5',
+              url: './h5.html',
+              pageParam: {
+                  url: img
+              }
+          });
+        }
 
+      }*/
+
+    //// ↑ ↑ ↑ ↑ ↑原方法  ↑ ↑ ↑ ↑ ↑////
     function imgUrl(url){
 
 
 
           if (url == '') {
+
 
             api.toast({
                 msg: '(#^.^#) 暂无详情'
@@ -262,6 +387,16 @@
 
                                                  //网络正常   跳转
 
+
+
+
+
+                                                       /*
+                                                       api.showProgress({
+                                                           title: 'VIP登录中',
+                                                           modal: false
+                                                       });
+                                                 */
                                                  api.toast({
                                                      msg: '加载中'
                                                  });
@@ -275,6 +410,10 @@
                                                          url: url
                                                      }
                                                  });
+
+
+
+
 
                                     } else {
 

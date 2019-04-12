@@ -16,9 +16,6 @@
 </head>
 <body>
 
-
-
-
 	<section class="aui-flexView">
 
 	            <section class="aui-scrollView">
@@ -68,24 +65,7 @@
 																			<div class="aui-flex-support">看直播</div>
 																	</a>
 
-												<!--					<a onClick="girlList()" class="aui-flex b-line">
-																			<div class="aui-flex-iphone">
-	                                        <img src="../image/app/meinv.png" alt="">
-																			</div>
-																			<div class="aui-flex-box">
-																				<p>
-																						<em class="aui-group-three"> 美女在线直播</em>
-																				</p>
-																					<h3>海量美女在线直播</h3>
-																					<p>
-																							<em class="aui-group-one">实时更新</em> <em class="aui-group-two">多才多艺</em>
-																					</p>
-
-																			</div>
-																			<div class="aui-flex-support-no">暂时下线</div>
-																	</a>
-
-	                                <a  onClick="vList()" class="aui-flex b-line">
+ <!--	                           <a  onClick="vList()" class="aui-flex b-line">
 	                                    <div class="aui-flex-iphone">
 	                                        <img src="../image/app/dianying.png" alt="">
 	                                    </div>
@@ -219,6 +199,15 @@ function gameList(){
 }
 //////////////////////   打开游戏列表  方法    gameList     E //////////////////////
 
+
+
+function girlList(){
+	var delay = 0;
+	api.toast({
+			msg: '暂时下线',
+			duration: 5000
+	});
+}
 
   //////////////////////   打开分类  方法    fenlei     S //////////////////////
   //////////////////////   模块已删除 暂时没用 留档备份    //////////////////////

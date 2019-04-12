@@ -7,10 +7,12 @@
     <title>title</title>
     <link rel="stylesheet" type="text/css" href="../css/myui.css" />
 </head>
-<body style="background-color:#fffae4">
+<body style="background-color:#fff">
+  <!--
   <div class="">
     <img src="../image/share_bg.png" alt="" width="100%">
   </div>
+-->
   <div class="sp-content">
 
     <div class="bigImg">
@@ -29,7 +31,7 @@
     		<ul>
     			<li>在本页面复制邀请链接或二维码发送给微信或QQ好友</li>
     			<li>好友使用链接后您将获得对应积分（在我的-积分兑换里可随时查看积分余额）</li>
-    			<li>在获取积分后您可以在APP积分页面兑换影视全网VIP</li>
+    			<li>在获取积分后您可以在APP积分页面兑换逆袭影院全网VIP</li>
     		</ul>
     	</div>
   </div>
@@ -40,7 +42,6 @@
   var api_url = localStorage.getItem('api_url');
   var copy = '';
   var shama = '';
-
   apiready = function(){
     api.parseTapmode();
     api.showProgress({
@@ -62,10 +63,10 @@
         if (ret) {
             copy = ret.msg;
             shama = ret.share;
-             //var url = $api.byId('url');
-             //var share = $api.byId('share');
-             //url.innerHTML = '<img src="http://qr.liantu.com/api.php?text='+ret.msg+'"/>';
-             //share.innerHTML = ret.share;
+             var url = $api.byId('url');
+             var share = $api.byId('share');
+             url.innerHTML = '<img src="http://qr.liantu.com/api.php?text='+ret.msg+'"/>';
+             share.innerHTML = ret.share;
             api.hideProgress();
 
         } else {
@@ -74,14 +75,8 @@
         }
     });
 
-
-
-
-
-
   }
 
-//////////二维码//////////
   function erweima(){
     var dialogBox = api.require('dialogBox');
     dialogBox.webView({
@@ -132,75 +127,52 @@
                 dialogName: 'webView'
             });
         }else {
-
           alert('请截屏后分享');
         }
     });
   }
-//////////二维码 //////////
 
 
-
-//////////复制分享链接 //////////
   function copySet(){
     api.ajax({
-        url: 'http://suo.im/api.php?format=json&url='+copy,
+        url: 'http://suo.im/api.php?url=http://101.132.102.96/'+copy,
         method: 'get'
     },function(ret, err){
+        if (ret) {
+          var clipBoard = api.require('clipBoard');
+          clipBoard.set({
+              value: '【逆袭影院】全网VIP视频免费看，高清无广告，再也不用充值会员啦！APP下载地址：'+ret[0].url_short
+          }, function(ret, err) {
+              if (ret) {
+                api.toast({
+                    msg: '已复制到剪切板',
+                    duration: 2000
+                });
+              } else {
 
+              }
+          });
+        } else {
+          var clipBoard = api.require('clipBoard');
+          clipBoard.set({
+              value: '【逆袭影院】全网VIP视频免费看，高清无广告，再也不用充值会员啦！APP下载地址：'+copy
+          }, function(ret, err) {
+              if (ret) {
+                api.toast({
+                    msg: '已复制到剪切板',
+                    duration: 2000
+                });
+              } else {
 
-if (ret) {
+              }
+          });
 
-/*
-  copy1 = ret.url;
-  shama1 = ret.share;
-  var share = $api.byId('share');
-  */
-
-   var url = $api.byId('url');
-
-  var clipBoard = api.require('clipBoard');
-  clipBoard.set({
-      value: '【逆袭影院】全网VIP视频免费看，高清无广告，再也不用充值会员啦！APP下载地址：'+ret.url
-  }, function(ret, err) {
-      if (ret) {
-        api.toast({
-            msg: '已复制到剪切板',
-            duration: 2000
-        });
-
-
-
-      } else {
-
-      }
-  });
-
-
-} else {
-
-  var clipBoard = api.require('clipBoard');
-  clipBoard.set({
-      value: '【逆袭影院】全网VIP视频免费看，高清无广告，再也不用充值会员啦！APP下载地址：'+copy
-  }, function(ret, err) {
-      if (ret) {
-        api.toast({
-            msg: '已复制到剪切板',
-            duration: 2000
-        });
-      } else {
-
-      }
-  });
-
-}
-
-
+        }
     });
 
 
   }
-//////////复制分享链接 //////////
+
 
 
 
