@@ -72,7 +72,6 @@ margin: auto;
       var password = $api.val($api.byId('password'));
 	  var password_reg = $api.val($api.byId('password_reg'));
       var yzcode = $api.val($api.byId('yzcode'));
-      var share = $api.val($api.byId('share'));
       if(username == ''){
         api.alert({
             title: '警告！',
@@ -88,13 +87,6 @@ margin: auto;
         return;
       }
 
-       //if(share == ''){
-        // api.alert({
-        //     title: '警告！',
-        //     msg: '请输入邀请码',
-        // });
-        // return;
-       //}
       if(username.length < 6){
         api.alert({
             title: '警告！',
@@ -260,17 +252,10 @@ margin: auto;
       }
       code_data = RndNum(6);
       var content = escape('#code#='+code_data);
-      //alert(code_data);
       api.ajax({
           url: 'http://v.juhe.cn/sms/send?mobile='+username+'&tpl_id=120573tpl_value='+content+'&key=f95d7a59e3044546d0fa0d3546ac4337',
           method: 'get'
       },function(ret, err){
-        // if (ret) {
-        //   alert( JSON.stringify( ret ) );
-        // }else {
-        //   alert( JSON.stringify( err ) );
-        // }
-
               api.toast({
                   msg: '发送成功',
                   duration: 1000,
