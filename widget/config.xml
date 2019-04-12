@@ -3,8 +3,6 @@
   <description>Example For APICloud.</description>
   <author email="developer@apicloud.com" href="http://www.apicloud.com">Developer</author>
   <content src="index.html"/>
-  <meta-data name="Mob-AppKey" value="2ad0ee5f881ae"/>
-  <meta-data name="Mob-AppSecret" value="3070d5b4270339f719e0352260726d10"/>
   <preference name="pageBounce" value="false"/>
   <preference name="appCertificateVerify" value="false"/>
   <preference name="appBackground" value="rgba(0,0,0,0.0)"/>

@@ -58,7 +58,6 @@
 <script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript">
     var api_url = localStorage.getItem('api_url');
-	var moduleSMSSDK = api.require('smssdk');
     var onoff = true;
     var code_data = '';
     apiready = function () {
@@ -119,28 +118,14 @@
         });
         return;
       }
-	  
-	  // param中的key命名不能改变
-	var param = {zone:'86', phoneNumber:username, code:yzcode};
-	moduleSMSSDK.commitCode(param, function(ret, err){
-	if (err !== null && err !== undefined && err !== '') {
-		api.alert({
-				title: '糟糕~',
-				msg: '短信验证码不正确',
-			});
-			return;
-	} else {
-	
-	}
-	});
-	  
-	  /*if (yzcode != code_data) {
+      if (yzcode != code_data) {
         api.alert({
             title: '糟糕~',
             msg: '短信验证码不正确',
         });
         return;
-      }*/
+
+      }
       api.ajax({
           url: api_url+'/login/login/repass.html',
           method: 'get',
@@ -220,10 +205,9 @@
         onoff = true;
         return;
       }
-      generateCode(username);
-	  //code_data = RndNum(6);
-      //var content = escape('#code#='+code_data);
-	  /*
+      code_data = RndNum(6);
+      var content = escape('#code#='+code_data);
+      //alert(content);
       api.ajax({
           url: 'http://101.132.102.96/login/login/yzcode.html',
           method: 'get',
@@ -246,42 +230,16 @@
           getApicode(username,content);
         }
       });
-		*/
+
     }
     //生成验证码
-    function generateCode(username){
-		var param = {zone:'86', phoneNumber: username};
-		moduleSMSSDK.getTextCode(param, function(ret, err){
-			if (err !== null && err !== undefined && err !== '') {
-			// 错误消息示例：{"msg":"Template not exist.","code":484}
-			alert("Error:\n" + JSON.stringify(err));
-			} else {
-			// 正常消息示例：{"smart":false}
-			alert("Success:\n" + JSON.stringify(ret));
-			}
-		});
-	}
-	/*
-	
-		var param = { phone: username };
-		sendsms.sendMessage(param, function(ret, err) {
-		if (ret.result == "ok") {
-			maxtime = 90;
-			timer1 = setInterval("send_code_jishi();", 1000);
-			alert("短信发送成功");
-		} else {
-			alert(ret.result);
-		}
-		});
-	
-	
-	function RndNum(n){
+    function RndNum(n){
       var rnd="";
       for(var i=0;i<n;i++)
           rnd+=Math.floor(Math.random()*10);
       return rnd;
     }
-	
+
      function getApicode(username,content) {
           var btn1 = $api.byId('btn1');
           api.ajax({
@@ -309,7 +267,7 @@
                   },1000)
           });
         }
-*/
+
 
 
 
