@@ -71,6 +71,8 @@ margin: auto;
       var username = $api.val($api.byId('username'));
       var password = $api.val($api.byId('password'));
 	  var password_reg = $api.val($api.byId('password_reg'));
+      var yzcode = $api.val($api.byId('yzcode'));
+      var share = $api.val($api.byId('share'));
       if(username == ''){
         api.alert({
             title: '警告！',
@@ -86,6 +88,13 @@ margin: auto;
         return;
       }
 
+       //if(share == ''){
+        // api.alert({
+        //     title: '警告！',
+        //     msg: '请输入邀请码',
+        // });
+        // return;
+       //}
       if(username.length < 6){
         api.alert({
             title: '警告！',
@@ -122,6 +131,7 @@ margin: auto;
               }
           }
       },function(ret, err){
+      	//alert(ret)
           if (ret) {
               if (ret.code == 0) {
                 api.hideProgress();
@@ -188,6 +198,7 @@ margin: auto;
                     } else {
                       api.hideProgress();
                       alert('网络错误！');
+                      //alert( JSON.stringify( err ) );
                       return;
                     }
                 });
