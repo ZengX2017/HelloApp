@@ -81,7 +81,7 @@
         <ul class="flex-wrap" style="font-weight:bold">
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >首页</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >直播</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" ></li>
+            <!--<li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" ></li>-->
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >福利</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >会员</li>
         </ul>
@@ -356,79 +356,6 @@
           pageParam:{url:url},
           bgColor: 'rgba(0,0,0,0)'
       });
-/*  去掉VIP限制
-    }else if (time == -1) {
-
-      setTimeout("playRadio();",2000);
-      var delay = 0;
-      if(api.systemType != 'ios'){
-          delay = 300;
-      }
-      api.openWin({
-          name: 'so_win',
-          url: 'html/so_win.html',
-          delay: 800,
-          pageParam:{url:url},
-          bgColor: '#000000'
-      });
-
-
-    }else if (time<timestamp){
-      var dialogBox = api.require('dialogBox');
-      dialogBox.alert({
-          texts: {
-              content: '您的VIP会员已过期，请及时续费！',
-              leftBtnTitle: '在想想',
-              rightBtnTitle: '去开通'
-          },
-          styles: {
-              bg: '#fff',
-              w: 300,
-              content: {
-                  color: '#000',
-                  size: 14
-              },
-              left: {
-                  marginB: 7,
-                  marginL: 20,
-                  w: 130,
-                  h: 35,
-                  corner: 2,
-                  bg: '#ff7600',
-                  color: '#fff',
-                  size: 14
-              },
-              right: {
-                  marginB: 7,
-                  marginL: 10,
-                  w: 130,
-                  h: 35,
-                  corner: 2,
-                  bg: '#ff7600',
-                  color: '#fff',
-                  size: 14
-              }
-          }
-      }, function(ret) {
-          if (ret.eventType == 'left') {
-              var dialogBox = api.require('dialogBox');
-              dialogBox.close({
-                  dialogName: 'alert'
-              });
-          }else if (ret.eventType == 'right') {
-            api.openWin({
-                name: 'open_vip_win',
-                url: 'html/open_vip_win.html',
-                delay: 300
-            });
-            var dialogBox = api.require('dialogBox');
-            dialogBox.close({
-                dialogName: 'alert'
-            });
-          }
-      });
-    }
-*/
   }
 
 
@@ -457,6 +384,7 @@
             index: index
         });
         
+		/* 去掉中间图标
 		if(index==2){
 				 api.openFrame({
 						name: 'page1',
@@ -476,6 +404,7 @@
 			}else{
 			api.closeFrame({name: 'page1'});
 			}
+			*/
     }
 
 //////////////////////   底部菜单切换  方法    randomSwitchBtn     E //////////////////////
