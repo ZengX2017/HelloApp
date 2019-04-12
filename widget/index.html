@@ -130,15 +130,22 @@
     /////  初始化执行   S /////
     /////  apiready  一打开就执行的 函数
     apiready = function () {
+
+
+
                                         //  检测网络是否正常 OK
                                         api.addEventListener({
                                               name: 'online'
                                           }, function(ret, err) {
+                                            //  connectionType = ret.connectionType;
+
+
                                                           //关闭无网络提示弹窗
                                                           var dialogBox = api.require('dialogBox');
                                                           dialogBox.close({
                                                               dialogName: 'alert'
                                                           });
+
 
                                                         //  GetTitleData();     ////获取标题和红包图标 ////
                                                           GetfunIniGroup();   ////执行页面获取 ////
@@ -147,6 +154,10 @@
                                                               msg: '网络已恢复',
                                                               duration: 5000
                                                           });
+
+
+
+
                                           });
 
 
@@ -258,7 +269,6 @@
 
 
 //////////////    单点登录检测方法     E       ///////////
-*/
 
     }
 /////  初始化执行   E /////
@@ -275,7 +285,7 @@
           pageParam:{url:url},
           bgColor: 'rgba(0,0,0,0)'
       });
-  }
+}
 
 
 //////////////////////   顶部右侧红包图片打开  方法    toBanner     E //////////////////////
@@ -303,8 +313,7 @@
             index: index
         });
         
-		/* 去掉中间图标
-		if(index==2){
+		/*if(index==2){
 				 api.openFrame({
 						name: 'page1',
 						//url: 'https://h5.kuaiyinshi.com/',
@@ -362,13 +371,6 @@
 		        }
 
 		        }
-
-            /*  去掉无网络弹窗提示
-            else {
-		            alert( '网络错误' );
-		            api.hideProgress();
-		        }
-            */
 		    });
 
 
@@ -392,13 +394,7 @@
 
 
 		        }
-/*  去掉无网络弹窗提示
 
-            else {
-		            alert( '网络错误' );
-		            api.hideProgress();
-		        }
-            */
 		    });
 }
 ////////           获取顶部标题   红包图标方法  GetTitleData     E         //////////////////
@@ -513,9 +509,6 @@ function ConnectionDetectionWithServer() {
     }
 
 //////////////////////   获取FRAME页面 方法    GetfunIniGroup     E //////////////////////
-
-
-
 
 
 </script>
